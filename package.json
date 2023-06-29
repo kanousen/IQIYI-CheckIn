@@ -19,7 +19,7 @@
   "homepage": "https://github.com/MayoBlueSky/Actions#readme",
   "dependencies": {
     "axios": "^1.0.0",
-    "axios-cookiejar-support": "^1.0.1",
+    "axios-cookiejar-support": "^4.0.0",
     "crypto-js": "^4.0.0",
     "download": "^8.0.0",
     "fs-extra": "^9.0.1",
