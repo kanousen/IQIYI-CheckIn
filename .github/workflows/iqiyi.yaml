@@ -3,7 +3,7 @@ name: 爱奇艺会员签到
 on:
     workflow_dispatch:
     schedule:
-        - cron: "*/20 16 * * *"
+        - cron: "0 21,12 * * *"
     watch:
         types: [started]
 
@@ -41,4 +41,3 @@ jobs:
                   BARK_SOUND: ${{ secrets.BARK_SOUND }}
                   DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
                   DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
-#最后推送 2021年9月20日
