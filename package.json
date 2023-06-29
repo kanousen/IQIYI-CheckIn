@@ -22,7 +22,7 @@
     "axios-cookiejar-support": "^4.0.0",
     "crypto-js": "^4.0.0",
     "download": "^8.0.0",
-    "fs-extra": "^9.0.1",
+    "fs-extra": "^11.0.0",
     "got": "^11.8.2",
     "moment": "^2.29.1",
     "p-queue": "^6.6.2",
