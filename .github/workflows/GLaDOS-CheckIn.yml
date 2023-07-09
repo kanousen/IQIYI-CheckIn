@@ -1,0 +1,41 @@
+name: GLaDOS签到
+
+on:
+  schedule:
+    - cron: "0 0,17 * * *"
+    
+  push:
+    branches: ["main"]
+    paths:  
+      - 'modify.txt'
+      - '.github/workflows/*'
+
+jobs:
+  GLaDOS-CheckIn:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v3
+
+      - name: 准备Python 3.10 # Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: 安装Python依赖
+        run: |
+          if [ -f ./GLaDOS/requirements.txt ]; then pip install -r ./GLaDOS/requirements.txt; fi
+
+      - name: GLaDOS开始签到
+        env:
+          cookie: ${{ secrets.GLADOS_COOKIE }}
+          # ======================================================================
+          is_ServerChan_push: 0    # 0-不推送消息，1-开启Server酱消息推送
+          SendKey: ${{ secrets.SENDKEY }}
+          is_PushPlus_push: 1   # 0-不推送消息，1-开启pushplus消息推送
+          token: ${{ secrets.TOKEN }}
+          is_Qmsg_push: 0       # 0-不推送消息，1-开启Qmsg消息推送
+          key: ${{ secrets.KEY }}
+        run: |
+          python ./GLaDOS/main.py
