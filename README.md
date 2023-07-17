@@ -5,8 +5,27 @@
 [百度网盘](https://pan.baidu.com/s/14hneaq48arlnyeLNcA5WzA?pwd=ut74#list/path=%2F)
 
   来源：
+
 [My-Actions](https://github.com/MayoBlueSky/My-Actions/tree/master) 
+
 [GLaDOS-CheckIn](https://github.com/feixuei/GLaDOS-CheckIn) 
+
+----
+# 
+[ChatGPT-Next-Web](https://pull.git.ci/process/gopcn/ChatGPT-Next-Web) 
+
+[NotionNext](https://pull.git.ci/process/gopcn/NotionNext) 
+
+[twikoo](https://pull.git.ci/process/gopcn/twikoo) 
+
+[aliyun-auto-signin](https://pull.git.ci/process/gopcn/aliyun-auto-signin) 
+
+[BiliBiliToolPro](https://pull.git.ci/process/gopcn/BiliBiliToolPro) 
+
+[Cloud189Checkin](https://pull.git.ci/process/gopcn/Cloud189Checkin) 
+
+[Telegraph-Image](https://pull.git.ci/process/gopcn/Telegraph-Image) 
+
 ----
 ##### Cookie变量设置 Secrets:**
 
