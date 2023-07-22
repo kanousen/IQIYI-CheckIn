@@ -24,8 +24,6 @@
 
 [Cloud189Checkin](https://pull.git.ci/process/gopcn/Cloud189Checkin) 
 
-[Telegraph-Image](https://pull.git.ci/process/gopcn/Telegraph-Image) 
-
 ----
 ##### Cookie变量设置 Secrets:**
 
