@@ -2,32 +2,34 @@ from json import dumps
 from requests import post, get
 from fake_useragent import UserAgent
 
+URL = "https://glados.rocks/api/user/checkin"
+URL2 = "https://glados.rocks/api/user/status"
+REFERER = 'https://glados.rocks/console/checkin'
+ORIGIN = "https://glados.rocks"
+UA = UserAgent()
+
 def CheckIn(cookie):
-    url = "https://glados.rocks/api/user/checkin"
-    url2 = "https://glados.rocks/api/user/status"
-    referer = 'https://glados.rocks/console/checkin'
-    origin = "https://glados.rocks"
     useragent = get_ua()
     payload = {
         'token': 'glados.network'
     }
     checkin = post(
-        url,
+        URL,
         headers={
             'cookie': cookie,
-            'referer': referer,
-            'origin': origin,
+            'referer': REFERER,
+            'origin': ORIGIN,
             'user-agent': useragent,
             'content-type': 'application/json;charset=UTF-8'
         },
         data=dumps(payload)
     )
     state = get(
-        url2,
+        URL2,
         headers={
             'cookie': cookie,
-            'referer': referer,
-            'origin': origin,
+            'referer': REFERER,
+            'origin': ORIGIN,
             'user-agent': useragent
         }
     )
@@ -43,10 +45,5 @@ def CheckIn(cookie):
     return f'{mess}，剩余{days}天', msg
 
 def get_ua():
-
-    # 创建UserAgent对象
-    user_agent = UserAgent()
-    # 获取随机的User-Agent字符串
-    random_user_agent = user_agent.random
-    # 随机的User-Agent
+    random_user_agent = UA.random
     return random_user_agent

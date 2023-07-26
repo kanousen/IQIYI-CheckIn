@@ -5,10 +5,10 @@ from requests import post, get
 
 
 def send_msg_ServerChan(SendKey, title, msg):
-
     if not SendKey:
         # 无SendKey则拦截推送
         return 'Sever酱: 未配置SendKey，无法进行消息推送。'
+
     logger.info('========================================')
     logger.info('Sever酱: 开始推送消息！')
     msg = msg.replace('\n', '\n\n')
@@ -32,11 +32,12 @@ def send_msg_ServerChan(SendKey, title, msg):
         count += 1
         sleep(1)
 
-def send_msg_PushPlus(token, title, msg):
 
+def send_msg_PushPlus(token, title, msg):
     if not token:
         # 无token则拦截推送
         return 'PushPlus: 未配置token，无法进行消息推送。'
+
     logger.info('========================================')
     logger.info('PushPlus: 开始推送消息！')
     url = 'http://www.pushplus.plus/send/'
@@ -52,9 +53,11 @@ def send_msg_PushPlus(token, title, msg):
     rsp = post(url=url, data=data, headers=headers)
     return rsp.json()['msg']
 
+
 def send_msg_Qmsg(key, msg):
     if not key:
         return 'Qmsg: 未配置key，无法进行消息推送。'
+
     logger.info('========================================')
     logger.info('Qmsg: 开始推送消息！')
     url = f'https://qmsg.zendee.cn:443/send/{key}?msg={msg}'
