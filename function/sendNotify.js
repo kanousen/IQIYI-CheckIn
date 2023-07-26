@@ -750,8 +750,7 @@ function Env(t, e) {
                 s.call(this, t, (t, s, r) => {
                     t ? i(t) : e(s)
                 })
-            }
-            )
+            })
         }
         get(t) {
             return this.send.call(this.env, t)
@@ -772,7 +771,7 @@ function Env(t, e) {
             this.logSeparator = "\n",
             this.startTime = (new Date).getTime(),
             Object.assign(this, e),
-            this.log("", `\ud83d\udd14${this.name}, \u5f00\u59cb!`)
+            this.log("", `🔔${this.name}, 开始!`)
         }
         isNode() {
             return "undefined" != typeof module && !!module.exports
@@ -824,8 +823,7 @@ function Env(t, e) {
                 this.get({
                     url: t
                 }, (t, s, i) => e(i))
-            }
-            )
+            })
         }
         runScript(t, e) {
             return new Promise(s => {
@@ -848,8 +846,7 @@ function Env(t, e) {
                     }
                 };
                 this.post(a, (t, e, i) => s(i))
-            }
-            ).catch(t => this.logErr(t))
+            }).catch(t => this.logErr(t))
         }
         loaddata() {
             if (!this.isNode())
@@ -925,4 +922,77 @@ function Env(t, e) {
                     const e = JSON.parse(h);
                     this.lodash_set(e, r, t),
                     s = this.setval(JSON.stringify(e), i)
+                } catch (e) {
+                    s = !1
                 }
+            } else
+                s = this.setval(t, e);
+            return s
+        }
+        getval(t) {
+            return this.isQuanX() ? $prefs.valueForKey(t) : this.isSurge() || this.isLoon() || this.isShadowrocket() ? this.getdata(t) : this.isNode() ? (this.data = this.loaddata(),
+            this.data[t]) : this.isJSBox() ? this.getdata(t) : this.isScriptable() ? this.getdata(t) : ""
+        }
+        setval(t, e) {
+            return this.isQuanX() ? $prefs.setValueForKey(t, e) : this.isSurge() || this.isLoon() || this.isShadowrocket() ? this.setdata(t, e) : this.isNode() ? (this.data = this.loaddata(),
+            this.data[e] = t,
+            this.writedata(),
+            !0) : this.isJSBox() ? this.setdata(t, e) : this.isScriptable() ? this.setdata(t, e) : ""
+        }
+        initGotEnv(t) {
+            this.got = this.got ? this.got : require("got"),
+            this.cktough = this.cktough ? this.cktough : require("tough-cookie"),
+            this.ckjar = this.ckjar ? this.ckjar : new this.cktough.CookieJar,
+            t && (t.headers = t.headers ? t.headers : {},
+            void 0 === t.headers.Cookie && void 0 === t.cookieJar && (t.cookieJar = this.ckjar))
+        }
+        get(t, e = (() => {})) {
+            return this.send(t, e)
+        }
+        post(t, e = (() => {})) {
+            return this.send(t, e, "POST")
+        }
+        send(t, e = (() => {}), s = "GET") {
+            if (this.initGotEnv(t),
+            this.isQuanX()) {
+                t.opts = t.opts ? t.opts : {};
+                const {
+                    url: e,
+                    ...s
+                } = t;
+                t.opts.headers = s,
+                t.opts.method = s && s.method ? s.method : s && "POST" === s ? "POST" : "GET";
+                return $task.fetch(e).then(t => {
+                    t.status = t.statusCode,
+                    e(t, null, t.body)
+                }, t => e(null, t.error, t))
+            }
+            {
+                const i = t.cookieJar || this.ckjar;
+                return t.headers && (delete t.headers["Content-Type"],
+                delete t.headers["Content-Length"]),
+                this.got[s.toLowerCase()](t.url, t)
+                .on("redirect", (t, e) => {
+                    try {
+                        if (t.headers["set-cookie"]) {
+                            const s = Array.isArray(t.headers["set-cookie"]) ? t.headers["set-cookie"] : [t.headers["set-cookie"]];
+                            s.forEach(t => i.setCookieSync(t, null))
+                        }
+                        t.headers.cookie && i.setCookieSync(t.headers.cookie, null);
+                        const s = e.redirectUrls[e.redirectUrls.length - 1],
+                        r = {
+                            url: s
+                        };
+                        this.initGotEnv(r),
+                        Object.assign(t.options, r),
+                        this.log(`\n\u3010${t.statusCode} Redirect\u3011${t.url}\n\u27a1️${r.url}`)
+                    } catch (t) {
+                        this.logErr(t)
+                    }
+                })
+                .then(t => {
+                    const s = t.headers,
+                    i = t.statusCode,
+                    r = t.body;
+                    return this.isLoon() && this.isNeedRewrite && (this.log("\u6b63\u5728\u91cd\u5199 Loon \u7684\u8bf7\u6c42..."),
+                    $task.fetch
