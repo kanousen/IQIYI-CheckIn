@@ -903,4 +903,4 @@ function Env(t,e){
         setdata(t,e){
             let s=!1;
             if(/^@/.test(e)){
-                const[,i,r]=/^@(.*?)\.(.*?)$/.exec(e),
+                const [i, r] = /^@(.?).(.?)$/.exec(e);
