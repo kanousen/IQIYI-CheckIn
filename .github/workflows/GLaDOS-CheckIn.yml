@@ -3,10 +3,10 @@ name: GLaDOS签到
 on:
   schedule:
     - cron: "0 0,17 * * *"
-    
+
   push:
     branches: ["main"]
-    paths:  
+    paths:
       - 'modify.txt'
       - '.github/workflows/*'
 

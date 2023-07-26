@@ -1,15 +1,23 @@
 name: Issue Translator
-on: 
-  issue_comment: 
+
+on:
+  issue_comment:
     types: [created]
-  issues: 
+  issues:
     types: [opened]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: usthe/issues-translate-action@v2.7
+      - name: Check Language
+        id: language-check
+        uses: usthe/check-issue-language-action@v1.0
+
+      - name: Translate Issue
+        id: translation
+        uses: usthe/translate-issue-action@v1.0
         with:
-          IS_MODIFY_TITLE: false
-          CUSTOM_BOT_NOTE: Bot detected the issue body's language is not English, translate it automatically.
+          issue_language: ${{ steps.language-check.outputs.language }}
+          is_modify_title: false
+          custom_bot_note: Bot detected the issue body's language is not English, translate it automatically.
