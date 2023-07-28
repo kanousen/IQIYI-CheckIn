@@ -10,7 +10,7 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
-        if: github.event.repository.owner.id == github.event.sender.id || ! github.event.sender.id || github.actor == 'BlueSkyClouds'
+        if: github.event.repository.owner.id == github.event.sender.id || !github.event.sender.id || github.actor == 'BlueSkyClouds'
         timeout-minutes: 3
         steps:
             - uses: actions/checkout@v3
@@ -18,12 +18,10 @@ jobs:
               uses: actions/setup-node@v3
               with:
                   node-version: 16
-            - name: npm install
-              run: |
-                  npm install
-            - name: "运行【爱奇艺会员签到】"
-              run: |
-                  node function/iQIYI-DailyBonus/iqiyi.js
+            - name: Install dependencies
+              run: npm install
+            - name: Run iQIYI Daily Bonus
+              run: node function/iQIYI-DailyBonus/iqiyi.js
               env:
                   iQIYI_COOKIE: ${{ secrets.iQIYI_COOKIE }}
                   SEND_KEY: ${{ secrets.SEND_KEY }}
