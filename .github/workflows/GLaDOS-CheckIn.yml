@@ -29,10 +29,10 @@ jobs:
       - name: GLaDOS开始签到
         env:
           cookie: ${{ secrets.GLADOS_COOKIE }}
-          is_ServerChan_push: 0   # 0-不推送消息，1-开启Server酱消息推送
+          is_ServerChan_push: 1   # 0-不推送消息，1-开启Server酱消息推送
           SendKey: ${{ secrets.SENDKEY }}
-          is_PushPlus_push: 1   # 0-不推送消息，1-开启pushplus消息推送
+          is_PushPlus_push: 0   # 0-不推送消息，1-开启pushplus消息推送
           token: ${{ secrets.TOKEN }}
-          is_Qmsg_push: 1   # 0-不推送消息，1-开启Qmsg消息推送
+          is_Qmsg_push: 0   # 0-不推送消息，1-开启Qmsg消息推送
           key: ${{ secrets.KEY }}
         run: python ./GLaDOS/main.py
