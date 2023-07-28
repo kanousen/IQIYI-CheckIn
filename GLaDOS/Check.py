@@ -1,3 +1,4 @@
+import json
 import requests
 from fake_useragent import UserAgent
 
@@ -5,30 +6,34 @@ URL = "https://glados.rocks/api/user/checkin"
 URL2 = "https://glados.rocks/api/user/status"
 REFERER = 'https://glados.rocks/console/checkin'
 ORIGIN = "https://glados.rocks"
+UA = UserAgent()
 
-def check_in(cookie):
-    ua = UserAgent()
-    user_agent = ua.random
-
-    payload = {'token': 'glados.network'}
-
+def CheckIn(cookie):
+    useragent = get_random_user_agent()
+    payload = {
+        'token': 'glados.network'
+    }
     headers = {
         'cookie': cookie,
         'referer': REFERER,
         'origin': ORIGIN,
-        'user-agent': user_agent,
+        'user-agent': useragent,
         'content-type': 'application/json;charset=UTF-8'
     }
 
-    checkin_response = requests.post(URL, headers=headers, json=payload)
-    state_response = requests.get(URL2, headers=headers)
+    checkin = requests.post(URL, headers=headers, data=json.dumps(payload))
+    state = requests.get(URL2, headers=headers)
 
-    checkin_data = checkin_response.json()
-    state_data = state_response.json()
+    mess = checkin.json()['message']
+    time = state.json()['data']['leftDays']
+    days = time.split('.')[0]
+    msg = f'checkin: {checkin.status_code} | state: {state.status_code}\n{mess}\n剩余天数：{days}天'
 
-    message = checkin_data['message']
-    left_days = state_data['data']['leftDays'].split('.')[0]
+    checkin.close()
+    state.close()
 
-    msg = f'checkin: {checkin_response.status_code} | state: {state_response.status_code}\n{message}\n剩余天数：{left_days}天'
+    return f'{mess}，剩余{days}天', msg
 
-    return f'{message}，剩余{left_days}天', msg
+def get_random_user_agent():
+    random_user_agent = UA.random
+    return random_user_agent
