@@ -1,5 +1,3 @@
-name: 爱奇艺会员签到
-
 on:
     workflow_dispatch:
     schedule:
@@ -18,9 +16,9 @@ jobs:
               uses: actions/setup-node@v3
               with:
                   node-version: 16
-            - name: Install dependencies
+            - name: npm install
               run: npm install
-            - name: Run iQIYI Daily Bonus
+            - name: "运行【爱奇艺会员签到】"
               run: node function/iQIYI-DailyBonus/iqiyi.js
               env:
                   iQIYI_COOKIE: ${{ secrets.iQIYI_COOKIE }}
