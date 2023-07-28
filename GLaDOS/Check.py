@@ -11,7 +11,7 @@ UA = UserAgent()
 def CheckIn(cookie):
     useragent = get_random_user_agent()
     payload = {
-        'token': 'glados.network'
+        'token': 'glados.one'
     }
     headers = {
         'cookie': cookie,
@@ -31,7 +31,6 @@ def CheckIn(cookie):
 
     checkin.close()
     state.close()
-
     return f'{mess}，剩余{days}天', msg
 
 def get_random_user_agent():
