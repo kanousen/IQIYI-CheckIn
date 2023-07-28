@@ -1,49 +1,34 @@
-from json import dumps
-from requests import post, get
+import requests
 from fake_useragent import UserAgent
 
 URL = "https://glados.rocks/api/user/checkin"
 URL2 = "https://glados.rocks/api/user/status"
 REFERER = 'https://glados.rocks/console/checkin'
 ORIGIN = "https://glados.rocks"
-UA = UserAgent()
 
-def CheckIn(cookie):
-    useragent = get_ua()
-    payload = {
-        'token': 'glados.network'
+def check_in(cookie):
+    ua = UserAgent()
+    user_agent = ua.random
+
+    payload = {'token': 'glados.network'}
+
+    headers = {
+        'cookie': cookie,
+        'referer': REFERER,
+        'origin': ORIGIN,
+        'user-agent': user_agent,
+        'content-type': 'application/json;charset=UTF-8'
     }
-    checkin = post(
-        URL,
-        headers={
-            'cookie': cookie,
-            'referer': REFERER,
-            'origin': ORIGIN,
-            'user-agent': useragent,
-            'content-type': 'application/json;charset=UTF-8'
-        },
-        data=dumps(payload)
-    )
-    state = get(
-        URL2,
-        headers={
-            'cookie': cookie,
-            'referer': REFERER,
-            'origin': ORIGIN,
-            'user-agent': useragent
-        }
-    )
 
-    mess = checkin.json()['message']
-    time = state.json()['data']['leftDays']
-    days = time.split('.')[0]
-    msg = f'checkin: {checkin.status_code} | state: {state.status_code}\n{mess}\n剩余天数：{days}天'
+    checkin_response = requests.post(URL, headers=headers, json=payload)
+    state_response = requests.get(URL2, headers=headers)
 
-    checkin.close()
-    state.close()
+    checkin_data = checkin_response.json()
+    state_data = state_response.json()
 
-    return f'{mess}，剩余{days}天', msg
+    message = checkin_data['message']
+    left_days = state_data['data']['leftDays'].split('.')[0]
 
-def get_ua():
-    random_user_agent = UA.random
-    return random_user_agent
+    msg = f'checkin: {checkin_response.status_code} | state: {state_response.status_code}\n{message}\n剩余天数：{left_days}天'
+
+    return f'{message}，剩余{left_days}天', msg
