@@ -21,7 +21,7 @@ def CheckIn(cookie):
         'content-type': 'application/json;charset=UTF-8'
     }
 
-    checkin = requests.post(URL, headers=headers, data=json.dumps(payload))
+    checkin = requests.post(URL, headers=headers, json=payload)
     state = requests.get(URL2, headers=headers)
 
     mess = checkin.json()['message']

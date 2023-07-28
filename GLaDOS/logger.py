@@ -7,6 +7,7 @@ def Shanghai(sec, what):
     tz = timezone('Asia/Shanghai')
     timenow = datetime.now(tz)
     return timenow.timetuple()
+
 logging.Formatter.converter = Shanghai
 
 # 创建logger对象
@@ -20,6 +21,8 @@ stream_handler = logging.StreamHandler()
 stream_handler.setLevel(logging.INFO) # log等级的开关
 stream_handler.setFormatter(formatter)
 
+# 移除之前的handler
+logger.handlers.clear()
 
-# 添加到logger
+# 添加新的handler
 logger.addHandler(stream_handler)

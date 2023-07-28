@@ -6,7 +6,6 @@ from requests import post, get
 
 def send_msg_ServerChan(SendKey, title, msg):
     if not SendKey:
-        # 无SendKey则拦截推送
         return 'Sever酱: 未配置SendKey，无法进行消息推送。'
 
     logger.info('========================================')
@@ -35,7 +34,6 @@ def send_msg_ServerChan(SendKey, title, msg):
 
 def send_msg_PushPlus(token, title, msg):
     if not token:
-        # 无token则拦截推送
         return 'PushPlus: 未配置token，无法进行消息推送。'
 
     logger.info('========================================')
@@ -49,8 +47,7 @@ def send_msg_PushPlus(token, title, msg):
         "template": "txt",
         "channel": "wechat"
     }
-    data = dumps(data).encode(encoding='utf-8')
-    rsp = post(url=url, data=data, headers=headers)
+    rsp = post(url=url, json=data, headers=headers)
     return rsp.json()['msg']
 
 
@@ -60,8 +57,9 @@ def send_msg_Qmsg(key, msg):
 
     logger.info('========================================')
     logger.info('Qmsg: 开始推送消息！')
-    url = f'https://qmsg.zendee.cn:443/send/{key}?msg={msg}'
-    rsp = get(url=url).json()
-    if rsp and rsp['success'] == True:
+    url = f'https://qmsg.zendee.cn:443/send/{key}'
+    params = {'msg': msg}
+    rsp = get(url=url, params=params).json()
+    if rsp and rsp['success']:
         return '消息推送成功！'
     return rsp
