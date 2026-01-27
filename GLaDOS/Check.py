@@ -2,10 +2,14 @@ import json
 import requests
 from fake_useragent import UserAgent
 
-URL = "https://glados.rocks/api/user/checkin"
-URL2 = "https://glados.rocks/api/user/status"
-REFERER = 'https://glados.rocks/console/checkin'
-ORIGIN = "https://glados.rocks"
+# URL = "https://glados.rocks/api/user/checkin"
+# URL2 = "https://glados.rocks/api/user/status"
+# REFERER = 'https://glados.rocks/console/checkin'
+# ORIGIN = "https://glados.rocks"
+URL = "https://glados.cloud/api/user/checkin"
+URL2 = "https://glados.cloud/api/user/status"
+REFERER = 'https://glados.cloud/console/checkin'
+ORIGIN = "https://glados.cloud"
 UA = UserAgent()
 
 def CheckIn(cookie):
