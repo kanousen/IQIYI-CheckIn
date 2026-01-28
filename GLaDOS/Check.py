@@ -15,7 +15,7 @@ UA = UserAgent()
 def CheckIn(cookie):
     useragent = get_random_user_agent()
     payload = {
-        'token': 'glados.one'
+        'token': 'glados.cloud'
     }
     headers = {
         'cookie': cookie,
