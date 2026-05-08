@@ -13,6 +13,7 @@ from fake_useragent import UserAgent
 
 URL = "https://railgun.info/api/user/checkin"
 URL2 = "https://railgun.info/api/user/status"
+URL3 = "https://railgun.info/api/user/points"
 REFERER = 'https://railgun.info/console/checkin'
 ORIGIN = "https://railgun.info"
 
@@ -33,11 +34,16 @@ def CheckIn(cookie):
 
     checkin = requests.post(URL, headers=headers, json=payload)
     state = requests.get(URL2, headers=headers)
+    point = requests.get(URL3, headers=headers)
 
     mess = checkin.json()['message']
     time = state.json()['data']['leftDays']
-    days = time.split('.')[0]
-    msg = f'checkin: {checkin.status_code} | state: {state.status_code}\n{mess}\n剩余天数：{days}天'
+    # days = time.split('.')[0]
+    days = time
+
+    points = point.json()['points'].split('.')[0]
+
+    msg = f'checkin: {checkin.status_code} | state: {state.status_code}\n{mess}\n剩余天数：{days}天 累积：{points}'
 
     checkin.close()
     state.close()
