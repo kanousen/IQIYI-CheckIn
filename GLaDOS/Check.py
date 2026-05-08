@@ -6,16 +6,22 @@ from fake_useragent import UserAgent
 # URL2 = "https://glados.rocks/api/user/status"
 # REFERER = 'https://glados.rocks/console/checkin'
 # ORIGIN = "https://glados.rocks"
-URL = "https://glados.cloud/api/user/checkin"
-URL2 = "https://glados.cloud/api/user/status"
-REFERER = 'https://glados.cloud/console/checkin'
-ORIGIN = "https://glados.cloud"
+# URL = "https://glados.cloud/api/user/checkin"
+# URL2 = "https://glados.cloud/api/user/status"
+# REFERER = 'https://glados.cloud/console/checkin'
+# ORIGIN = "https://glados.cloud"
+
+URL = "https://railgun.info/api/user/checkin"
+URL2 = "https://railgun.info/api/user/status"
+REFERER = 'https://railgun.info/console/checkin'
+ORIGIN = "https://railgun.info"
+
 UA = UserAgent()
 
 def CheckIn(cookie):
     useragent = get_random_user_agent()
     payload = {
-        'token': 'glados.cloud'
+        'token': 'railgun.info'
     }
     headers = {
         'cookie': cookie,
