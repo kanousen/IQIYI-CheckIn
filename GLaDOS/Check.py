@@ -54,7 +54,7 @@ def CheckIn(cookie):
 
     checkin.close()
     state.close()
-    return f'{mess}，剩余{days}天', msg
+    return f'剩余天数：{days}天 累积：{points}', msg
 
 def get_random_user_agent():
     random_user_agent = UA.random
