@@ -45,12 +45,12 @@ def CheckIn(cookie):
 
     mess = checkin.json()['message']
     time = state.json()['data']['leftDays']
-    # days = time.split('.')[0]
-    days = time
+    days = time.split('.')[0]
+    # days = time
 
     points = point.json()['points'].split('.')[0]
 
-    msg = f'checkin: {checkin.status_code} | state: {state.status_code}\n{mess}\n剩余天数：{days}天 累积：{points}'
+    msg = f'{mess}\n剩余天数：{days}天 累积：{points}\ncheckin: {checkin.status_code} | state: {state.status_code}'
 
     checkin.close()
     state.close()
