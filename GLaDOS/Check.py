@@ -29,7 +29,7 @@ UA = UserAgent()
 def CheckIn(cookie):
     useragent = get_random_user_agent()
     payload = {
-        'token': 'railgun.info'
+        'token': 'glados.one'
     }
     headers = {
         'cookie': cookie,
