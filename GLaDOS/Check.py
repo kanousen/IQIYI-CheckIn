@@ -6,16 +6,23 @@ from fake_useragent import UserAgent
 # URL2 = "https://glados.rocks/api/user/status"
 # REFERER = 'https://glados.rocks/console/checkin'
 # ORIGIN = "https://glados.rocks"
+
 # URL = "https://glados.cloud/api/user/checkin"
 # URL2 = "https://glados.cloud/api/user/status"
 # REFERER = 'https://glados.cloud/console/checkin'
 # ORIGIN = "https://glados.cloud"
 
-URL = "https://railgun.info/api/user/checkin"
-URL2 = "https://railgun.info/api/user/status"
-URL3 = "https://railgun.info/api/user/points"
-REFERER = 'https://railgun.info/console/checkin'
-ORIGIN = "https://railgun.info"
+# URL = "https://railgun.info/api/user/checkin"
+# URL2 = "https://railgun.info/api/user/status"
+# URL3 = "https://railgun.info/api/user/points"
+# REFERER = 'https://railgun.info/console/checkin'
+# ORIGIN = "https://railgun.info"
+
+URL = "https://glados.one/api/user/checkin"
+URL2 = "https://glados.one/api/user/status"
+URL3 = "https://glados.one/api/user/points"
+REFERER = 'https://glados.one/console/checkin'
+ORIGIN = "https://glados.one"
 
 UA = UserAgent()
 
