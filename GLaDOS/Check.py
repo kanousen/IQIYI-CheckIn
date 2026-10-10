@@ -24,13 +24,10 @@ URL3 = "https://glados.one/api/user/points"
 REFERER = 'https://glados.one/console/checkin'
 ORIGIN = "https://glados.one"
 
-UA_MAC = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-          "AppleWebKit/537.36 (KHTML, like Gecko) "
-          "Chrome/124.0.0.0 Safari/537.36")
-
-UA_WIN = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-          "AppleWebKit/537.36 (KHTML, like Gecko) "
-          "Chrome/124.0.0.0 Safari/537.36")
+# 统一使用同一个 UA（这里以 Windows 为例）
+UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+      "AppleWebKit/537.36 (KHTML, like Gecko) "
+      "Chrome/124.0.0.0 Safari/537.36")
 
 def CheckIn(cookie):
     useragent = get_random_user_agent()
@@ -41,7 +38,7 @@ def CheckIn(cookie):
         'cookie': cookie,
         'referer': REFERER,
         'origin': ORIGIN,
-        'user-agent': useragent,
+        'user-agent': UA,
         'content-type': 'application/json;charset=UTF-8'
     }
 
