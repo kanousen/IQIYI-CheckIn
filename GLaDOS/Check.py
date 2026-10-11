@@ -30,7 +30,7 @@ UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
       "Chrome/124.0.0.0 Safari/537.36")
 
 def CheckIn(cookie):
-    useragent = get_random_user_agent()
+    # useragent = get_random_user_agent()
     payload = {
         'token': 'glados.one'
     }
