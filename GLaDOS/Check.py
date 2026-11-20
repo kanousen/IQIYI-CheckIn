@@ -1,6 +1,6 @@
-import json
-import requests
-from fake_useragent import UserAgent
+# import json
+# import requests
+# from fake_useragent import UserAgent
 
 # URL = "https://glados.rocks/api/user/checkin"
 # URL2 = "https://glados.rocks/api/user/status"
