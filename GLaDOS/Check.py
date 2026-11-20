@@ -18,19 +18,67 @@ from fake_useragent import UserAgent
 # REFERER = 'https://railgun.info/console/checkin'
 # ORIGIN = "https://railgun.info"
 
+# URL = "https://glados.one/api/user/checkin"
+# URL2 = "https://glados.one/api/user/status"
+# URL3 = "https://glados.one/api/user/points"
+# REFERER = 'https://glados.one/console/checkin'
+# ORIGIN = "https://glados.one"
+
+# # 统一使用同一个 UA（这里以 Windows 为例）
+# UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+#       "AppleWebKit/537.36 (KHTML, like Gecko) "
+#       "Chrome/124.0.0.0 Safari/537.36")
+
+# def CheckIn(cookie):
+#     # useragent = get_random_user_agent()
+#     payload = {
+#         'token': 'glados.one'
+#     }
+#     headers = {
+#         'cookie': cookie,
+#         'referer': REFERER,
+#         'origin': ORIGIN,
+#         'user-agent': UA,
+#         'content-type': 'application/json;charset=UTF-8'
+#     }
+
+#     checkin = requests.post(URL, headers=headers, json=payload)
+#     state = requests.get(URL2, headers=headers)
+#     point = requests.get(URL3, headers=headers)
+
+#     mess = checkin.json()['message']
+#     time = state.json()['data']['leftDays']
+#     days = time.split('.')[0]
+#     # days = time
+
+#     points = point.json()['points'].split('.')[0]
+
+#     msg = f'{mess}\n剩余天数：{days}天 累积：{points}\ncheckin: {checkin.status_code} | state: {state.status_code}'
+
+#     checkin.close()
+#     state.close()
+#     return f'剩余天数：{days}天 累积：{points}', msg
+
+# def get_random_user_agent():
+#     random_user_agent = UA.random
+#     return random_user_agent
+
+
+import json
+from curl_cffi import requests
+
+
 URL = "https://glados.one/api/user/checkin"
 URL2 = "https://glados.one/api/user/status"
 URL3 = "https://glados.one/api/user/points"
 REFERER = 'https://glados.one/console/checkin'
 ORIGIN = "https://glados.one"
 
-# 统一使用同一个 UA（这里以 Windows 为例）
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
       "AppleWebKit/537.36 (KHTML, like Gecko) "
       "Chrome/124.0.0.0 Safari/537.36")
 
 def CheckIn(cookie):
-    # useragent = get_random_user_agent()
     payload = {
         'token': 'glados.one'
     }
@@ -49,7 +97,6 @@ def CheckIn(cookie):
     mess = checkin.json()['message']
     time = state.json()['data']['leftDays']
     days = time.split('.')[0]
-    # days = time
 
     points = point.json()['points'].split('.')[0]
 
@@ -59,6 +106,4 @@ def CheckIn(cookie):
     state.close()
     return f'剩余天数：{days}天 累积：{points}', msg
 
-def get_random_user_agent():
-    random_user_agent = UA.random
-    return random_user_agent
+
